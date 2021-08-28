@@ -26,7 +26,7 @@ const menuItemSchema = new Schema({
   },
   category: {
     type: Schema.Types.ObjectId,
-    ref: 'Category',
+    ref: 'Restaurant',
     required: true
   }
 });
