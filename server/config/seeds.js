@@ -18,104 +18,87 @@ db.once('open', async () => {
       name: 'Nachos',
       description:
         'Chips with melted cheese, salsa, sour cream, guacamole, and your choice of meet',
-      image: 'cookie-tin.jpg',
-      category: categories[0]._id,
+      image: 'nachos.jpg',
+      category: restaurants[1]._id,
       price: 15.99
-    },
-    {
-      name: 'Chips & Salsa',
-      description:
-        'Our house-made tortilla chips along with our house-made salsa',
-      image: 'cookie-tin.jpg',
-      category: categories[0]._id,
-      price: 6.99
     },
     {
       name: 'Quesadilla',
       description:
         'Cheese quesadilla with salsa and sour cream on the side',
-      image: 'canned-coffee.jpg',
-      category: categories[0]._id,
+      image: 'quesadillas.jpg',
+      category: restaurants[1]._id,
       price: 7.49
     },
     {
       name: 'Burrito',
-      category: categories[1]._id,
+      category: restaurants[1]._id,
       description:
         'Mexican rice, black beans, salsa, sour cream, guacamole, cheese, and your choice of meat',
-      image: 'toilet-paper.jpg',
+      image: 'burrito.jpg',
       price: 15.99
     },
     {
       name: 'Tacos',
-      category: categories[1]._id,
+      category: restaurants[1]._id,
       description:
         'Three authentic mexican tacos with your choice of meat',
-      image: 'soap.jpg',
+      image: 'tacos.jpg',
       price: 14.49,
     },
     {
-      name: 'Fajitas',
-      category: categories[1]._id,
-      description:
-        'Cooked peppers and onions and your choice of chicken or beef along with two tortillas',
-      image: 'wooden-spoons.jpg',
-      price: 14.99,
-      quantity: 100
-    },
-    {
       name: 'Tamales',
-      category: categories[1]._id,
+      category: restaurants[1]._id,
       description:
         'Two of our special authenic made tamales!',
-      image: 'wooden-spoons.jpg',
+      image: 'tamales.jpg',
       price: 14.99,
     },
     {
       name: 'Horchata',
-      category: categories[2]._id,
+      category: restaurants[1]._id,
       description:
         'A traditional mexican beverage',
-      image: 'camera.jpg',
+      image: 'horchata.jpg',
       price: 5.49,
     },
     {
       name: 'Jarritos',
-      category: categories[2]._id,
+      category: restaurants[1]._id,
       description:
         'Mexican Soda',
-      image: 'tablet.jpg',
+      image: 'jarritos.jpg',
       price: 2.49,
     },
     {
       name: 'Margarita',
-      category: categories[2]._id,
+      category: restaurants[1]._id,
       description:
         'Margarita with top-shelf tequila',
-      image: 'bedtime-book.jpg',
+      image: 'margaritas.jpg',
       price: 11.99,
     },
     {
       name: 'Tres Leches Cake',
-      category: categories[3]._id,
+      category: restaurants[1]._id,
       description: 'Slice of Three Layered Cake',
-      image: 'spinning-top.jpg',
+      image: 'tres-leches.jpg',
       price: 7.49,
     },
     {
       name: 'Churros',
-      category: categories[3]._id,
+      category: restaurants[1]._id,
       description:
         '6 Mini Churros',
-      image: 'plastic-horses.jpg',
+      image: 'churros.jpg',
       price: 3.49,
     },
     {
       name: 'Caramel Flan',
-      category: categories[3]._id,
+      category: restaurants[1]._id,
       description:
         'Custard dessert with a layer of caramel at the top',
-      image: 'teddy-bear.jpg',
+      image: 'caramel-flan.jpg',
       price: 7.99,
     }
   ]);
