@@ -1,0 +1,16 @@
+.dash{
+    background-color: #232F3E; 
+   position: relative;
+   min-height: 50vh;
+   max-height: 60vh;
+   background-repeat: no-repeat;
+   background-position: center center;
+   overflow: hidden; 
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+ }
