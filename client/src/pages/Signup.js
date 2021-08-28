@@ -31,13 +31,13 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
+    <div className="container my-1" style={{display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'15%', paddingRight:'15%'}}>
 
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
+      <h2 style={{alignSelf:'center', paddingRight:'3%', paddingTop:'10%'}}>Signup</h2>
+
+      <form onSubmit={handleFormSubmit} style={{alignSelf:'center'}}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="firstName">First Name </label>
           <input
             placeholder="First"
             name="firstName"
@@ -47,7 +47,7 @@ function Signup(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
+          <label htmlFor="lastName">Last Name </label>
           <input
             placeholder="Last"
             name="lastName"
@@ -57,7 +57,7 @@ function Signup(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email </label>
           <input
             placeholder="youremail@test.com"
             name="email"
@@ -67,7 +67,7 @@ function Signup(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
+          <label htmlFor="pwd">Password </label>
           <input
             placeholder="******"
             name="password"
@@ -76,10 +76,13 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row flex-end">
+        <div style={{display:'flex', justifyContent:'center', paddingTop:'5%'}}>
           <button type="submit">Submit</button>
         </div>
       </form>
+      <ul style={{listStyleType: "none", alignSelf:'center', paddingRight:'5%', paddingTop:'10%'}}>
+      <li><Link to="/">Return to Home </Link></li>
+      </ul>
     </div>
   );
 }
