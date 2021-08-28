@@ -4,7 +4,7 @@ const { User, MenuItem, Restaurant } = require('../models');
 db.once('open', async () => {
   await Restaurant.deleteMany();
 
-  const restaurats = await Restaurant.insertMany([
+  const restaurants = await Restaurant.insertMany([
     { image: 'alfredos-logo.png' },
     { image: 'guac-n-roll-logo.png' },
   ]);
