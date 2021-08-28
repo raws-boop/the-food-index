@@ -5,7 +5,7 @@ import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
 } from '../../utils/actions';
-import { QUERY_CATEGORIES } from '../../utils/queries';
+import { QUERY_RESTAURANT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
@@ -13,7 +13,7 @@ function CategoryMenu() {
 
   const { categories } = state;
 
-  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const { loading, data: categoryData } = useQuery(QUERY_RESTAURANT);
 
   useEffect(() => {
     if (categoryData) {
