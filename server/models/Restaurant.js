@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const restaurantSchema = new Schema({
-  name: {
+  image: {
     type: String,
     required: true,
     trim: true
