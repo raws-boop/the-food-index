@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const resturauntSchema = new Schema({
+const restaurantSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -10,6 +10,6 @@ const resturauntSchema = new Schema({
   }
 });
 
-const Resturaunt = mongoose.model('Resturaunt', resturauntSchema);
+const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
-module.exports = Resturaunt;
+module.exports = Restaurant;
