@@ -8,7 +8,7 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
-  UPDATE_PRODUCTS,
+  UPDATE_MENU_ITEMS,
 } from '../utils/actions';
 import { QUERY_MENU_ITEM} from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
@@ -32,7 +32,7 @@ function Detail() {
     // retrieved from server
     else if (data) {
       dispatch({
-        type: UPDATE_PRODUCTS,
+        type: UPDATE_MENU_ITEMS,
         products: data.products,
       });
 
@@ -44,7 +44,7 @@ function Detail() {
     else if (!loading) {
       idbPromise('products', 'get').then((indexedProducts) => {
         dispatch({
-          type: UPDATE_PRODUCTS,
+          type: UPDATE_MENU_ITEMS,
           products: indexedProducts,
         });
       });

@@ -13,7 +13,7 @@ const typeDefs = gql`
     image: String
     quantity: Int
     price: Float
-    category: Category
+    restaurant: Restaurant
   }
 
   type Order {
@@ -40,12 +40,12 @@ const typeDefs = gql`
   }
 
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [MenuItem]
-    product(_id: ID!): MenuItem
+    menuItems: [MenuItem]
+    menuItems(restaurant: ID, name: String): [MenuItem]
+    menuItem(_id: ID!): MenuItem
     user: User
     order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    checkout(menuItems: [ID]!): Checkout
   }
 
   type Mutation {
