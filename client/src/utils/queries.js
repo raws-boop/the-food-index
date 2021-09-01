@@ -25,8 +25,8 @@ export const QUERY_CHECKOUT = gql`
 `;
 
 export const QUERY_ALL_MENU_ITEMS = gql`
-  {
-    menuItems {
+  query menuItems($restaurant:ID,$name:String){
+    menuItems(restaurant:$restaurant,name:$name) {
       _id
       name
       description
