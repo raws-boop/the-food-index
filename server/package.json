@@ -22,10 +22,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
-  },
-  "proxy": {
-    "/api/":  {
-      "target": "http://localhost:3000"
-    }
   }
 }
