@@ -16,6 +16,7 @@ function CategoryMenu() {
   const { loading, data: restaurantData } = useQuery(QUERY_RESTAURANT);
 
   useEffect(() => {
+    console.log("Restaurant data", restaurantData)
     if (restaurantData) {
       dispatch({
         type: UPDATE_RESTAURANTS,
