@@ -18,38 +18,38 @@ function Detail() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
-  const [currentProduct, setCurrentProduct] = useState({});
+  const [currentMenuItem, setCurrentMenuItem] = useState({});
 
   const { loading, data } = useQuery(QUERY_MENU_ITEM);
 
-  const { products, cart } = state;
+  const { menuItems, cart } = state;
 
   useEffect(() => {
     // already in global store
-    if (products.length) {
-      setCurrentProduct(products.find((product) => product._id === id));
+    if (menuItems.length) {
+      setCurrentMenuItem(menuItems.find((MenuItem) => MenuItem._id === id));
     }
     // retrieved from server
     else if (data) {
       dispatch({
         type: UPDATE_MENU_ITEMS,
-        products: data.products,
+        menuItems: data.menuItems,
       });
 
-      data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
+      data.menuItems.forEach((MenuItem) => {
+        idbPromise('menuItems', 'put', MenuItem);
       });
     }
     // get cache from idb
     else if (!loading) {
-      idbPromise('products', 'get').then((indexedProducts) => {
+      idbPromise('menuItems', 'get').then((indexedMenuItems) => {
         dispatch({
           type: UPDATE_MENU_ITEMS,
-          products: indexedProducts,
+          menuItems: indexedMenuItems,
         });
       });
     }
-  }, [products, data, loading, dispatch, id]);
+  }, [menuItems, data, loading, dispatch, id]);
 
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id);
@@ -66,36 +66,36 @@ function Detail() {
     } else {
       dispatch({
         type: ADD_TO_CART,
-        product: { ...currentProduct, purchaseQuantity: 1 },
+        MenuItem: { ...currentMenuItem, purchaseQuantity: 1 },
       });
-      idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+      idbPromise('cart', 'put', { ...currentMenuItem, purchaseQuantity: 1 });
     }
   };
 
   const removeFromCart = () => {
     dispatch({
       type: REMOVE_FROM_CART,
-      _id: currentProduct._id,
+      _id: currentMenuItem._id,
     });
 
-    idbPromise('cart', 'delete', { ...currentProduct });
+    idbPromise('cart', 'delete', { ...currentMenuItem });
   };
 
   return (
     <>
-      {currentProduct && cart ? (
+      {currentMenuItem && cart ? (
         <div className="container my-1">
-          <Link to="/">← Back to Products</Link>
+          <Link to="/">← Back to Menu</Link>
 
-          <h2>{currentProduct.name}</h2>
+          <h2>{currentMenuItem.name}</h2>
 
-          <p>{currentProduct.description}</p>
+          <p>{currentMenuItem.description}</p>
 
           <p>
-            <strong>Price:</strong>${currentProduct.price}{' '}
+            <strong>Price:</strong>${currentMenuItem.price}{' '}
             <button onClick={addToCart}>Add to Cart</button>
             <button
-              disabled={!cart.find((p) => p._id === currentProduct._id)}
+              disabled={!cart.find((p) => p._id === currentMenuItem._id)}
               onClick={removeFromCart}
             >
               Remove from Cart
@@ -103,8 +103,8 @@ function Detail() {
           </p>
 
           <img
-            src={`/images/${currentProduct.image}`}
-            alt={currentProduct.name}
+            src={`/images/${currentMenuItem.image}`}
+            alt={currentMenuItem.name}
           />
         </div>
       ) : null}
