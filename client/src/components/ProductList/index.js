@@ -15,13 +15,14 @@ function ProductList() {
   const { loading, data } = useQuery(QUERY_MENU_ITEM);
 
   useEffect(() => {
+    console.log("Menu Items", data)
     if (data) {
       dispatch({
         type: UPDATE_MENU_ITEMS,
         menuItems: data.menuItems,
       });
       data.menuItems.forEach((menuItem) => {
-        idbPromise('products', 'put', menuItem);
+        idbPromise('menuItems', 'put', menuItem);
       });
     } else if (!loading) {
       idbPromise('menuItems', 'get').then((menuItems) => {
@@ -34,19 +35,20 @@ function ProductList() {
   }, [data, loading, dispatch]);
 
   function filterProducts() {
+    console.log("current restaurant", currentRestaurant)
     if (!currentRestaurant) {
       return state.menuItems;
     }
 
     return state.menuItems.filter(
-      (product) => product.category._id === currentRestaurant
+      (product) => product.restaurant._id === currentRestaurant
     );
   }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.menuItems.length ? (
+      {state.menuItems?.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
             <ProductItem
@@ -55,7 +57,6 @@ function ProductList() {
               image={product.image}
               name={product.name}
               price={product.price}
-              quantity={product.quantity}
             />
           ))}
         </div>
