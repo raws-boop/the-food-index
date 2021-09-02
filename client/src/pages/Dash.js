@@ -6,7 +6,7 @@ const Dash = () => {
     return (
         <div className="dashContainer">
             <DashboardHome/>
-            <CategoryMenu />
+            <CategoryMenu/>
         </div>
     )
 }

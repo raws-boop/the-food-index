@@ -30,10 +30,10 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
+    <div className="container my-1" style={{display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'15%', paddingRight:'15%'}}>
 
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
+      <h2 style={{alignSelf:'center', paddingRight:'3%', paddingTop:'10%'}}>Login</h2>
+      <form onSubmit={handleFormSubmit} style={{alignSelf:'center'}}>
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email address </label>
           <input
@@ -59,11 +59,11 @@ function Login(props) {
             <p className="error-text">The provided credentials are incorrect</p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
+        <div className="flex-row flex-end" style={{display:'flex', justifyContent:'center', paddingTop:'5%'}}>
           <button type="submit">Submit</button>
         </div>
       </form>
-      <ul style={{listStyleType: "none"}}>
+      <ul style={{listStyleType: "none", alignSelf:'center', paddingTop:'10%'}}>
       <li><Link to="/">Return to Home</Link></li>
       </ul>
     </div>
