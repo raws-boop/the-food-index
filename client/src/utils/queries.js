@@ -1,15 +1,14 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_PRODUCTS = gql`
-  query getProducts($category: ID) {
-    products(category: $category) {
+export const QUERY_MENU_ITEM = gql`
+  query getMenuItem($restaurant: ID) {
+    menuItems(restaurant: $restaurant) {
       _id
       name
       description
       price
-      quantity
       image
-      category {
+      restaurant {
         _id
       }
     }
@@ -17,33 +16,33 @@ export const QUERY_PRODUCTS = gql`
 `;
 
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($products: [ID]!) {
-    checkout(products: $products) {
+  query getCheckout($menuItems: [ID]!) {
+    checkout(menuItems: $menuItems) {
       session
     }
   }
 `;
 
-export const QUERY_ALL_PRODUCTS = gql`
-  {
-    products {
+export const QUERY_ALL_MENU_ITEMS = gql`
+  query menuItems($restaurant:ID,$name:String){
+    menuItems(restaurant:$restaurant,name:$name) {
       _id
       name
       description
       price
       quantity
-      category {
-        name
+      restaurant {
+        _id
       }
     }
   }
 `;
 
-export const QUERY_CATEGORIES = gql`
+export const QUERY_RESTAURANT = gql`
   {
-    categories {
+    restaurants {
       _id
-      name
+      image
     }
   }
 `;
@@ -56,7 +55,7 @@ export const QUERY_USER = gql`
       orders {
         _id
         purchaseDate
-        products {
+        menuItems {
           _id
           name
           description

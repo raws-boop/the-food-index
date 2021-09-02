@@ -1,52 +1,54 @@
 import React, { useEffect } from 'react';
 import ProductItem from '../ProductItem';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { UPDATE_MENU_ITEMS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCTS } from '../../utils/queries';
+import { QUERY_MENU_ITEM} from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
 function ProductList() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
+  const { currentRestaurant } = state;
 
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const { loading, data } = useQuery(QUERY_MENU_ITEM);
 
   useEffect(() => {
+    console.log("Menu Items", data)
     if (data) {
       dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products,
+        type: UPDATE_MENU_ITEMS,
+        menuItems: data.menuItems,
       });
-      data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
+      data.menuItems.forEach((menuItem) => {
+        idbPromise('menuItems', 'put', menuItem);
       });
     } else if (!loading) {
-      idbPromise('products', 'get').then((products) => {
+      idbPromise('menuItems', 'get').then((menuItems) => {
         dispatch({
-          type: UPDATE_PRODUCTS,
-          products: products,
+          type: UPDATE_MENU_ITEMS,
+          menuItems: menuItems,
         });
       });
     }
   }, [data, loading, dispatch]);
 
   function filterProducts() {
-    if (!currentCategory) {
-      return state.products;
+    console.log("current restaurant", currentRestaurant)
+    if (!currentRestaurant) {
+      return state.menuItems;
     }
 
-    return state.products.filter(
-      (product) => product.category._id === currentCategory
+    return state.menuItems.filter(
+      (product) => product.restaurant._id === currentRestaurant
     );
   }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.products.length ? (
+      {state.menuItems?.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
             <ProductItem
@@ -55,12 +57,11 @@ function ProductList() {
               image={product.image}
               name={product.name}
               price={product.price}
-              quantity={product.quantity}
             />
           ))}
         </div>
       ) : (
-        <h3>You haven't added any products yet!</h3>
+        <h3>You haven't added any menuItems yet!</h3>
       )}
       {loading ? <img src={spinner} alt="loading" /> : null}
     </div>

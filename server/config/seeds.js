@@ -1,132 +1,205 @@
 const db = require('./connection');
-const { User, Product, Category } = require('../models');
+const { User, MenuItem, Restaurant } = require('../models');
 
 db.once('open', async () => {
-  await Category.deleteMany();
+  await Restaurant.deleteMany();
 
-  const categories = await Category.insertMany([
-    { name: 'Food' },
-    { name: 'Household Supplies' },
-    { name: 'Electronics' },
-    { name: 'Books' },
-    { name: 'Toys' }
+  const restaurants = await Restaurant.insertMany([
+    { image: 'guac-n-roll-logo.png' },
+    { image: 'alfredos-logo.png' }
   ]);
 
-  console.log('categories seeded');
+  console.log('restaurants seeded');
 
-  await Product.deleteMany();
+  await MenuItem.deleteMany();
 
-  const products = await Product.insertMany([
+  const menuItems = await MenuItem.insertMany([
     {
-      name: 'Tin of Cookies',
+      name: 'Nachos',
       description:
-        'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-      image: 'cookie-tin.jpg',
-      category: categories[0]._id,
-      price: 2.99,
-      quantity: 500
+        'Chips with melted cheese, salsa, sour cream, guacamole, and your choice of meet',
+      image: 'nachos.jpg',
+      restaurant: restaurants[0]._id,
+      price: 15.99
     },
     {
-      name: 'Canned Coffee',
+      name: 'Quesadilla',
       description:
-        'Praesent sed lacinia mauris. Nulla congue nibh magna, at feugiat nunc scelerisque quis. Donec iaculis rutrum vulputate. Suspendisse lectus sem, vulputate ac lectus sed, placerat consequat dui.',
-      image: 'canned-coffee.jpg',
-      category: categories[0]._id,
-      price: 1.99,
-      quantity: 500
+        'Cheese quesadilla with salsa and sour cream on the side',
+      image: 'quesadillas.jpg',
+      restaurant: restaurants[0]._id,
+      price: 7.49
     },
     {
-      name: 'Toilet Paper',
-      category: categories[1]._id,
+      name: 'Burrito',
+      restaurant: restaurants[0]._id,
       description:
-        'Donec volutpat erat erat, sit amet gravida justo sodales in. Phasellus tempus euismod urna. Proin ultrices nisi ut ipsum congue, vitae porttitor libero suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam lacinia a nisi non congue.',
-      image: 'toilet-paper.jpg',
-      price: 7.99,
-      quantity: 20
+        'Mexican rice, black beans, salsa, sour cream, guacamole, cheese, and your choice of meat',
+      image: 'burritos.jpg',
+      price: 15.99
     },
     {
-      name: 'Handmade Soap',
-      category: categories[1]._id,
+      name: 'Tacos',
+      restaurant: restaurants[0]._id,
       description:
-        'Praesent placerat, odio vel euismod venenatis, lectus arcu laoreet felis, et fringilla sapien turpis vestibulum nisl.',
-      image: 'soap.jpg',
-      price: 3.99,
-      quantity: 50
+        'Three authentic mexican tacos with your choice of meat',
+      image: 'tacos.jpg',
+      price: 14.49
     },
     {
-      name: 'Set of Wooden Spoons',
-      category: categories[1]._id,
+      name: 'Tamales',
+      restaurant: restaurants[0]._id,
       description:
-        'Vivamus ut turpis in purus pretium mollis. Donec turpis odio, semper vel interdum ut, vulputate at ex. Duis dignissim nisi vel tortor imperdiet finibus. Aenean aliquam sagittis rutrum.',
-      image: 'wooden-spoons.jpg',
-      price: 14.99,
-      quantity: 100
+        'Two of our special authenic made tamales!',
+      image: 'tamales.jpg',
+      price: 14.99
     },
     {
-      name: 'Camera',
-      category: categories[2]._id,
+      name: 'Horchata',
+      restaurant: restaurants[0]._id,
       description:
-        'Vestibulum risus metus, luctus non tortor quis, tincidunt consectetur ex. Nullam vitae lobortis ligula, ut sagittis massa. Curabitur consectetur, tellus at pulvinar venenatis, erat augue cursus erat, eu ullamcorper eros lectus ultrices ipsum. Integer rutrum, augue vitae auctor venenatis, turpis turpis elementum orci, at sagittis risus mi a leo.',
-      image: 'camera.jpg',
-      price: 399.99,
-      quantity: 30
+        'A traditional mexican beverage',
+      image: 'horchata.jpg',
+      price: 5.49
     },
     {
-      name: 'Tablet',
-      category: categories[2]._id,
+      name: 'Jarritos',
+      restaurant: restaurants[0]._id,
       description:
-        'In sodales, ipsum quis ultricies porttitor, tellus urna aliquam arcu, eget venenatis purus ligula ut nisi. Fusce ut felis dolor. Mauris justo ante, aliquet non tempus in, tempus ac lorem. Aliquam lacinia dolor eu sem eleifend ultrices. Etiam mattis metus metus. Sed ligula dui, placerat non turpis vitae, suscipit volutpat elit. Phasellus sagittis, diam elementum suscipit fringilla, libero mauris scelerisque ex, ac interdum diam erat non sapien.',
-      image: 'tablet.jpg',
-      price: 199.99,
-      quantity: 30
+        'Mexican Soda',
+      image: 'jarritos.jpg',
+      price: 2.49
     },
     {
-      name: 'Tales at Bedtime',
-      category: categories[3]._id,
+      name: 'Margarita',
+      restaurant: restaurants[0]._id,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare diam quis eleifend rutrum. Aliquam nulla est, volutpat non enim nec, pharetra gravida augue. Donec vitae dictum neque. Pellentesque arcu lorem, fringilla non ligula ac, tristique bibendum erat. Ut a semper nibh. Quisque a mi et mi tempor ultricies. Maecenas eu ipsum eu enim hendrerit accumsan at euismod urna.',
-      image: 'bedtime-book.jpg',
-      price: 9.99,
-      quantity: 100
+        'Margarita with top-shelf tequila',
+      image: 'margaritas.jpg',
+      price: 11.99
     },
     {
-      name: 'Spinning Top',
-      category: categories[4]._id,
-      description: 'Ut vulputate hendrerit nibh, a placerat elit cursus interdum.',
-      image: 'spinning-top.jpg',
-      price: 1.99,
-      quantity: 1000
+      name: 'Tres Leches Cake',
+      restaurant: restaurants[0]._id,
+      description: 'Slice of Three Layered Cake',
+      image: 'tres-leches.jpg',
+      price: 7.49
     },
     {
-      name: 'Set of Plastic Horses',
-      category: categories[4]._id,
+      name: 'Churros',
+      restaurant: restaurants[0]._id,
       description:
-        'Sed a mauris condimentum, elementum enim in, rhoncus dui. Phasellus lobortis leo odio, sit amet pharetra turpis porta quis.',
-      image: 'plastic-horses.jpg',
-      price: 2.99,
-      quantity: 1000
+        '6 Mini Churros',
+      image: 'churros.jpg',
+      price: 3.49
     },
     {
-      name: 'Teddy Bear',
-      category: categories[4]._id,
+      name: 'Caramel Flan',
+      restaurant: restaurants[0]._id,
       description:
-        'Vestibulum et erat finibus erat suscipit vulputate sed vitae dui. Ut laoreet tellus sit amet justo bibendum ultrices. Donec vitae felis vestibulum, congue augue eu, finibus turpis.',
-      image: 'teddy-bear.jpg',
-      price: 7.99,
-      quantity: 100
+        'Custard dessert with a layer of caramel at the top',
+      image: 'caramel-flan.jpg',
+      price: 7.99
     },
     {
-      name: 'Alphabet Blocks',
-      category: categories[4]._id,
+      name: 'Bruschetta',
+      restaurant: restaurants[1]._id,
       description:
-        'Morbi consectetur viverra urna, eu fringilla turpis faucibus sit amet. Suspendisse potenti. Donec at dui ac sapien eleifend hendrerit vel sit amet lectus.',
-      image: 'alphabet-blocks.jpg',
-      price: 9.99,
-      quantity: 600
+        'Grilled bread with some fresh toppings',
+      image: 'bruschetta.jpg',
+      price: 7.99
+    },
+    {
+      name: 'Caprese Salad',
+      restaurant: restaurants[1]._id,
+      description:
+        'A classic and simple Italian salad',
+      image: 'caprese-salad.jpg',
+      price: 6.99
+    },
+    {
+      name: 'Arancini',
+      restaurant: restaurants[1]._id,
+      description:
+        'Deep fried rice balls stuffed with cheese',
+      image: 'aracini.jpg',
+      price: 7.99
+    },
+    {
+      name: 'Lasagna',
+      restaurant: restaurants[1]._id,
+      description:
+        'Layers of pasta with meat and cheese in between',
+      image: 'lasagna.jpg',
+      price: 15.99
+    },
+    {
+      name: 'Spaghetti',
+      restaurant: restaurants[1]._id,
+      description:
+        'Classic pasta dish with marinara sauce with your choice to add meatballs',
+      image: 'spaghetti.jpg',
+      price: 13.99
+    },
+    {
+      name: 'Carbonara',
+      restaurant: restaurants[1]._id,
+      description:
+        'Pasta with a white sauce and bacon',
+      image: 'carbonara.jpg',
+      price: 12.99
+    },
+    {
+      name: 'Espresso',
+      restaurant: restaurants[1]._id,
+      description:
+        'Coffee made the italian way',
+      image: 'espresso.jpg',
+      price: 3.99
+    },
+    {
+      name: 'Campari',
+      restaurant: restaurants[1]._id,
+      description: 
+        'A tasty Italian alcoholic drink',
+      image: 'campari.jpg',
+      price: 5.99
+    },
+    {
+      name: 'Bellini',
+      restaurant: restaurants[1]._id,
+      description:
+        'A peach flavored cocktail',
+      image: 'bellini.jpg',
+      price: 11.99
+    },
+    {
+      name: 'Tiramisu',
+      restaurant: restaurants[1]._id,
+      description:
+        'Yummy coffee flavored cake',
+      image: 'tiramisu.jpg',
+      price: 7.99
+    },
+    {
+      name: 'Cannoli',
+      restaurant: restaurants[1]._id,
+      description:
+        'Tasty Italian pastry',
+      image: 'cannoli.jpg',
+      price: 7.99
+    },
+    {
+      name: 'Gelato',
+      restaurant: restaurants[1]._id,
+      description:
+        'An Italian take on ice cream',
+      image: 'gelato.jpg',
+      price: 7.99
     }
   ]);
 
-  console.log('products seeded');
+  console.log('menu items seeded');
 
   await User.deleteMany();
 
@@ -137,7 +210,7 @@ db.once('open', async () => {
     password: 'password12345',
     orders: [
       {
-        products: [products[0]._id, products[0]._id, products[1]._id]
+        menuItems: [menuItems[0]._id, menuItems[0]._id, menuItems[1]._id]
       }
     ]
   });
@@ -150,6 +223,5 @@ db.once('open', async () => {
   });
 
   console.log('users seeded');
-
   process.exit();
 });

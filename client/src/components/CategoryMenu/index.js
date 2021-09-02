@@ -2,56 +2,57 @@ import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import {
-  UPDATE_CATEGORIES,
-  UPDATE_CURRENT_CATEGORY,
+  UPDATE_RESTAURANTS,
+  UPDATE_CURRENT_RESTAURANT,
 } from '../../utils/actions';
-import { QUERY_CATEGORIES } from '../../utils/queries';
+import { QUERY_RESTAURANT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
   const [state, dispatch] = useStoreContext();
 
-  const { categories } = state;
+  const { restaurants } = state;
 
-  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const { loading, data: restaurantData } = useQuery(QUERY_RESTAURANT);
 
   useEffect(() => {
-    if (categoryData) {
+    console.log("Restaurant data", restaurantData)
+    if (restaurantData) {
       dispatch({
-        type: UPDATE_CATEGORIES,
-        categories: categoryData.categories,
+        type: UPDATE_RESTAURANTS,
+        restaurants: restaurantData.restaurants,
       });
-      categoryData.categories.forEach((category) => {
-        idbPromise('categories', 'put', category);
+      restaurantData.restaurants.forEach((restaurant) => {
+        idbPromise('restaurants', 'put', restaurant);
       });
     } else if (!loading) {
-      idbPromise('categories', 'get').then((categories) => {
+      idbPromise('restaurants', 'get').then((restaurants) => {
         dispatch({
-          type: UPDATE_CATEGORIES,
-          categories: categories,
+          type: UPDATE_RESTAURANTS,
+          restaurants: restaurants,
         });
       });
     }
-  }, [categoryData, loading, dispatch]);
+  }, [restaurantData, loading, dispatch]);
 
   const handleClick = (id) => {
     dispatch({
-      type: UPDATE_CURRENT_CATEGORY,
-      currentCategory: id,
+      type: UPDATE_CURRENT_RESTAURANT,
+      currentRestaurant: id,
     });
   };
 
   return (
     <div>
-      <h2>Choose a Category:</h2>
-      {categories.map((item) => (
+      <h2>Restaurants</h2>
+      {restaurants?.map((item) => (
         <button
           key={item._id}
           onClick={() => {
             handleClick(item._id);
           }}
         >
-          {item.name}
+          {item.image}
         </button>
       ))}
     </div>

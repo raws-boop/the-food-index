@@ -1,18 +1,18 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, MenuItem, Restaurant, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    categories: async () => {
-      return await Category.find();
+    restaurants: async () => {
+      return await Restaurant.find();
     },
-    products: async (parent, { category, name }) => {
+    menuItems: async (parent, { restaurant, name }) => {
       const params = {};
 
-      if (category) {
-        params.category = category;
+      if (restaurant) {
+        params.restaurant = restaurant;
       }
 
       if (name) {
@@ -21,16 +21,16 @@ const resolvers = {
         };
       }
 
-      return await Product.find(params).populate('category');
+      return await MenuItem.find(params).populate('restaurant');
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
+    menuItem: async (parent, { _id }) => {
+      return await MenuItem.findById(_id).populate('restaurant');
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+          path: 'orders.menuItems',
+          populate: 'restaurant'
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -43,8 +43,8 @@ const resolvers = {
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+          path: 'orders.menuItems',
+          populate: 'restaurant'
         });
 
         return user.orders.id(_id);
@@ -54,21 +54,21 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ products: args.products });
+      const order = new Order({ menuItems: args.menuItems });
       const line_items = [];
 
-      const { products } = await order.populate('products').execPopulate();
+      const { menuItems } = await order.populate('menuItems').execPopulate();
 
-      for (let i = 0; i < products.length; i++) {
-        const product = await stripe.products.create({
-          name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+      for (let i = 0; i < menuItems.length; i++) {
+        const menuItem = await stripe.menuItems.create({
+          name: menuItems[i].name,
+          description: menuItems[i].description,
+          images: [`${url}/images/${menuItems[i].image}`]
         });
 
         const price = await stripe.prices.create({
-          product: product.id,
-          unit_amount: products[i].price * 100,
+          menuItem: menuItem.id,
+          unit_amount: menuItems[i].price * 100,
           currency: 'usd',
         });
 
@@ -96,10 +96,10 @@ const resolvers = {
 
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
+    addOrder: async (parent, { menuItems }, context) => {
       console.log(context);
       if (context.user) {
-        const order = new Order({ products });
+        const order = new Order({ menuItems });
 
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
@@ -115,10 +115,10 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateProduct: async (parent, { _id, quantity }) => {
+    updateMenuItem: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      return await MenuItem.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
