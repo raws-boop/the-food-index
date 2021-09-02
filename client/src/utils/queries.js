@@ -7,7 +7,6 @@ export const QUERY_MENU_ITEM = gql`
       name
       description
       price
-      quantity
       image
       restaurant {
         _id
@@ -33,7 +32,7 @@ export const QUERY_ALL_MENU_ITEMS = gql`
       price
       quantity
       restaurant {
-        name
+        _id
       }
     }
   }
@@ -43,7 +42,7 @@ export const QUERY_RESTAURANT = gql`
   {
     restaurants {
       _id
-      name
+      image
     }
   }
 `;

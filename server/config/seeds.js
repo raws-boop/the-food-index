@@ -19,7 +19,7 @@ db.once('open', async () => {
       description:
         'Chips with melted cheese, salsa, sour cream, guacamole, and your choice of meet',
       image: 'nachos.jpg',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       price: 15.99
     },
     {
@@ -27,20 +27,20 @@ db.once('open', async () => {
       description:
         'Cheese quesadilla with salsa and sour cream on the side',
       image: 'quesadillas.jpg',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       price: 7.49
     },
     {
       name: 'Burrito',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'Mexican rice, black beans, salsa, sour cream, guacamole, cheese, and your choice of meat',
-      image: 'burrito.jpg',
+      image: 'burritos.jpg',
       price: 15.99
     },
     {
       name: 'Tacos',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'Three authentic mexican tacos with your choice of meat',
       image: 'tacos.jpg',
@@ -48,7 +48,7 @@ db.once('open', async () => {
     },
     {
       name: 'Tamales',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'Two of our special authenic made tamales!',
       image: 'tamales.jpg',
@@ -56,7 +56,7 @@ db.once('open', async () => {
     },
     {
       name: 'Horchata',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'A traditional mexican beverage',
       image: 'horchata.jpg',
@@ -64,7 +64,7 @@ db.once('open', async () => {
     },
     {
       name: 'Jarritos',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'Mexican Soda',
       image: 'jarritos.jpg',
@@ -72,7 +72,7 @@ db.once('open', async () => {
     },
     {
       name: 'Margarita',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'Margarita with top-shelf tequila',
       image: 'margaritas.jpg',
@@ -80,14 +80,14 @@ db.once('open', async () => {
     },
     {
       name: 'Tres Leches Cake',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description: 'Slice of Three Layered Cake',
       image: 'tres-leches.jpg',
       price: 7.49
     },
     {
       name: 'Churros',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         '6 Mini Churros',
       image: 'churros.jpg',
@@ -95,7 +95,7 @@ db.once('open', async () => {
     },
     {
       name: 'Caramel Flan',
-      category: restaurants[0]._id,
+      restaurant: restaurants[0]._id,
       description:
         'Custard dessert with a layer of caramel at the top',
       image: 'caramel-flan.jpg',
@@ -103,7 +103,7 @@ db.once('open', async () => {
     },
     {
       name: 'Bruschetta',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Grilled bread with some fresh toppings',
       image: 'bruschetta.jpg',
@@ -111,7 +111,7 @@ db.once('open', async () => {
     },
     {
       name: 'Caprese Salad',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'A classic and simple Italian salad',
       image: 'caprese-salad.jpg',
@@ -119,15 +119,15 @@ db.once('open', async () => {
     },
     {
       name: 'Arancini',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Deep fried rice balls stuffed with cheese',
-      image: 'arancini.jpg',
+      image: 'aracini.jpg',
       price: 7.99
     },
     {
       name: 'Lasagna',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Layers of pasta with meat and cheese in between',
       image: 'lasagna.jpg',
@@ -135,7 +135,7 @@ db.once('open', async () => {
     },
     {
       name: 'Spaghetti',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Classic pasta dish with marinara sauce with your choice to add meatballs',
       image: 'spaghetti.jpg',
@@ -143,7 +143,7 @@ db.once('open', async () => {
     },
     {
       name: 'Carbonara',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Pasta with a white sauce and bacon',
       image: 'carbonara.jpg',
@@ -151,7 +151,7 @@ db.once('open', async () => {
     },
     {
       name: 'Espresso',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Coffee made the italian way',
       image: 'espresso.jpg',
@@ -159,7 +159,7 @@ db.once('open', async () => {
     },
     {
       name: 'Campari',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description: 
         'A tasty Italian alcoholic drink',
       image: 'campari.jpg',
@@ -167,7 +167,7 @@ db.once('open', async () => {
     },
     {
       name: 'Bellini',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'A peach flavored cocktail',
       image: 'bellini.jpg',
@@ -175,7 +175,7 @@ db.once('open', async () => {
     },
     {
       name: 'Tiramisu',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Yummy coffee flavored cake',
       image: 'tiramisu.jpg',
@@ -183,7 +183,7 @@ db.once('open', async () => {
     },
     {
       name: 'Cannoli',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'Tasty Italian pastry',
       image: 'cannoli.jpg',
@@ -191,7 +191,7 @@ db.once('open', async () => {
     },
     {
       name: 'Gelato',
-      category: restaurants[1]._id,
+      restaurant: restaurants[1]._id,
       description:
         'An Italian take on ice cream',
       image: 'gelato.jpg',

@@ -14,7 +14,7 @@ const menuItemSchema = new Schema({
   image: {
     type: String
   },
-  category: {
+  restaurant: {
     type: Schema.Types.ObjectId,
     ref: 'Restaurant',
     required: true
