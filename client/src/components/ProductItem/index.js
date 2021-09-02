@@ -33,7 +33,7 @@ function ProductItem(item) {
     } else {
       dispatch({
         type: ADD_TO_CART,
-        product: { ...item, purchaseQuantity: 1 }
+        MenuItem: { ...item, purchaseQuantity: 1 }
       });
       idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
     }
@@ -41,7 +41,7 @@ function ProductItem(item) {
 
   return (
     <div className="card px-1 py-1">
-      <Link to={`/products/${_id}`}>
+      <Link to={`/menuItems/${_id}`}>
         <img
           alt={name}
           src={`/images/${image}`}
@@ -49,7 +49,7 @@ function ProductItem(item) {
         <p>{name}</p>
       </Link>
       <div>
-        <div>{quantity} {pluralize("item", quantity)} in stock</div>
+        <div>{quantity} {pluralize("item", quantity)} In Stock</div>
         <span>${price}</span>
       </div>
       <button onClick={addToCart}>Add to cart</button>

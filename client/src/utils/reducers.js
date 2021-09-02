@@ -25,7 +25,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         cartOpen: true,
-        cart: [...state.cart, action.menuItem],
+        cart: [...state.cart, action.menuItems],
       };
     case ADD_MULTIPLE_TO_CART:
       return {
@@ -38,19 +38,19 @@ export const reducer = (state, action) => {
       return {
         ...state,
         cartOpen: true,
-        cart: state.cart.map((menuItem) => {
-          if (action._id === menuItem._id) {
-            menuItem.purchaseQuantity = action.purchaseQuantity;
+        cart: state.cart.map((menuItems) => {
+          if (action._id === menuItems._id) {
+            menuItems.purchaseQuantity = action.purchaseQuantity;
           }
-          return menuItem;
+          return menuItems;
         }),
       };
 
     // First we iterate through each item in the cart and check to see if the `product._id` matches the `action._id`
     // If so, we remove it from our cart and set the updated state to a variable called `newState`
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter((menuItem) => {
-        return menuItem._id !== action._id;
+      let newState = state.cart.filter((menuItems) => {
+        return menuItems._id !== action._id;
       });
 
       // Then we return a copy of state and check to see if the cart is empty.

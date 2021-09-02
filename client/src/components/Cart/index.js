@@ -26,7 +26,7 @@ const Cart = () => {
   useEffect(() => {
     async function getCart() {
       const cart = await idbPromise('cart', 'get');
-      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+      dispatch({ type: ADD_MULTIPLE_TO_CART, menuItems: [...cart] });
     }
 
     if (!state.cart.length) {
@@ -47,16 +47,16 @@ const Cart = () => {
   }
 
   function submitCheckout() {
-    const productIds = [];
+    const menuIds = [];
 
     state.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
-        productIds.push(item._id);
+        menuIds.push(item._id);
       }
     });
 
     getCheckout({
-      variables: { products: productIds },
+      variables: { menuItems: menuIds },
     });
   }
 
@@ -73,9 +73,9 @@ const Cart = () => {
   return (
     <div className="cart">
       <div className="close" onClick={toggleCart}>
-        [close]
+        [Close]
       </div>
-      <h2>Shopping Cart</h2>
+      <h2>Your Cart</h2>
       {state.cart.length ? (
         <div>
           {state.cart.map((item) => (
@@ -88,7 +88,7 @@ const Cart = () => {
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
-              <span>(log in to check out)</span>
+              <span>(Log in to check out)</span>
             )}
           </div>
         </div>
