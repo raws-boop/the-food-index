@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './style.css';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import {
@@ -43,10 +44,11 @@ function CategoryMenu() {
   };
 
   return (
-    <div>
+    <div className="restaurantPlacement">
       <h2>Restaurants</h2>
       {restaurants?.map((item) => (
-        <button
+        <div className="restaurantBtn">
+          <button
           key={item._id}
           onClick={() => {
             handleClick(item._id);
@@ -54,6 +56,7 @@ function CategoryMenu() {
         >
           {item.image}
         </button>
+        </div>
       ))}
     </div>
   );

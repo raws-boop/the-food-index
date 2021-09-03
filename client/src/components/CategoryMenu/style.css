@@ -1,0 +1,14 @@
+h2{
+    padding: 5%;
+    text-align: center;
+}
+
+button{
+    align-self: center;
+}
+
+.restaurantBtn{
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}

@@ -60,14 +60,14 @@ const resolvers = {
       const { menuItems } = await order.populate('menuItems').execPopulate();
 
       for (let i = 0; i < menuItems.length; i++) {
-        const menuItem = await stripe.menuItems.create({
+        const MenuItem = await stripe.menuItems.create({
           name: menuItems[i].name,
           description: menuItems[i].description,
           images: [`${url}/images/${menuItems[i].image}`]
         });
 
         const price = await stripe.prices.create({
-          menuItem: menuItem.id,
+          MenuItem: MenuItem.id,
           unit_amount: menuItems[i].price * 100,
           currency: 'usd',
         });

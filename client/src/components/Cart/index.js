@@ -47,16 +47,16 @@ const Cart = () => {
   }
 
   function submitCheckout() {
-    const menuIds = [];
+    const MenuItemIds = [];
 
     state.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
-        menuIds.push(item._id);
+        MenuItemIds.push(item._id);
       }
     });
 
     getCheckout({
-      variables: { menuItems: menuIds },
+      variables: { menuItems: MenuItemIds },
     });
   }
 
@@ -93,12 +93,9 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
+        <p>
           You haven't added anything to your cart yet!
-        </h3>
+        </p>
       )}
     </div>
   );

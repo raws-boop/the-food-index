@@ -5,8 +5,8 @@ db.once('open', async () => {
   await Restaurant.deleteMany();
 
   const restaurants = await Restaurant.insertMany([
-    { image: 'guac-n-roll-logo.png' },
-    { image: 'alfredos-logo.png' }
+    { image: "Guac n Roll" },
+    { image: "Alfredo's"}
   ]);
 
   console.log('restaurants seeded');
