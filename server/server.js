@@ -1,3 +1,5 @@
+const uri = process.env.MONGODB_URI;
+
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
