@@ -2,7 +2,7 @@
 This is a team project that creates a full stack MERN(MongoDB, Express.js, React.js, Node.js) single-page application that allows the user to find restaurants by cuisine and order food from a restaurant if they desire. The user can add items to their cart but must have an account and be signed in to checkout. 
 
 ## Deployed Application
-![picture of website](/Assets/the-food-index.png "screenshot of page")
+![picture of website](/assets/the-food-index.png "screenshot of page")
 - URL : https://the-food-index.herokuapp.com/
 
 ## Contributors
